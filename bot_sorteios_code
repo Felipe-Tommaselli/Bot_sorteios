@@ -123,7 +123,7 @@ palavras = [
     "branco",
     "marrom",
 ]
-# não esquece de abrir e fechar aspas nem da virgula
+
 i = 0
 escolhe = 0
 
@@ -134,7 +134,6 @@ f.write(
 f.close()
 
 time.sleep(7)
-# melhor não mexer nesse tempo aqui
 pyautogui.move(0,-220)
 while keyboard.is_pressed("shift") == False:
 
@@ -153,9 +152,6 @@ while keyboard.is_pressed("shift") == False:
     if word == " ":
         emoji_variavel()
 
-    # esse tempo aq de baixo voce mexe no intervalo
-    # i é o numero de vezes que  o programa rodou
-    # se quiser aumentar u diminuir o tempo pode
     if i > 15:
         time.sleep(random.uniform(i - 10, i))  #
     elif i > 50:
