@@ -1,6 +1,5 @@
 import pyautogui, time, random, keyboard, win32gui
 
-
 def emoji_fixo():
 
     pyautogui.hotkey("ctrl", "v")
