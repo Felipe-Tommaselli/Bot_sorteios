@@ -9,7 +9,7 @@ def emoji():
 
     pyautogui.hotkey("ctrl", "v")
 
-
+# função que impede o codigo de rodar da 1 AM até as 6 AM
 def night_check():
     now = str(datetime.now())
 
@@ -19,7 +19,7 @@ def night_check():
         time.sleep(5 * 3600)
 
 
-# função resposnavel por adiconar mais aleatoriedade ao codigo
+# função responsavel por adiconar mais aleatoriedade ao codigo
 def choose():
     escolhe = random.randint(1, 3)
     if escolhe == 3:
@@ -27,9 +27,23 @@ def choose():
     elif escolhe == 2:
         time.sleep(random.uniform(5, 10))
 
+# formata a data do momento usado pelo handling_file() no log.txt
+def today_date():
+    dia = str(date.today().day)
+    mes = str(date.today().month)
+    ano = str(date.today().year)
 
+    if date.today().day < 10:
+        dia = '0' + dia
+    if date.today().month < 10:
+        mes = '0' + mes 
+    return dia + '-' + mes + '-' + ano
+
+# de acordo com o modo escolhido roda relaiza os comentarios em diferentes
+# itensidades [comentarios por minuto]
 def bot_mode(modo, i):
 
+    # modo leve [comentarios por min]
     if modo == 1:
         if i > 15:
             time.sleep(random.uniform(i - 5, i + 20))
@@ -37,7 +51,7 @@ def bot_mode(modo, i):
             time.sleep(random.uniform(i - 15, i + 20))
         else:
             time.sleep(random.uniform(10, 18))
-
+    # modo moderado [comentarios por min]
     elif modo == 2:
         if i > 15:
             time.sleep(random.uniform(i - 10, i + 10))
@@ -45,7 +59,7 @@ def bot_mode(modo, i):
             time.sleep(random.uniform(i - 30, i + 5))
         else:
             time.sleep(random.uniform(5, 15))
-
+    # modo intenso [comentarios por min]
     elif modo == 3:
         if i > 15:
             time.sleep(random.uniform(i - 20, i + 0))
@@ -54,8 +68,9 @@ def bot_mode(modo, i):
         else:
             time.sleep(random.uniform(5, 10))
 
+    # bad input case
     else:
-        print("INVALID INPUT\nO modo default (2. Moderado) foi acionado")
+        if i == 1: print("INVALID INPUT\nO modo default (2. Moderado) foi acionado")
         modo = 2
         bot_mode(modo, i)
 
@@ -99,11 +114,12 @@ def handling_file():
 
         # compara a data que ta no cabeçalho com a data de hoje
         f = open("log.txt", "a+")
+
         if int(date.today().day) == int(nums[0]):
             break
         else:
             f.write(
-                f"\n----------- {time.strftime('%d-%m-%Y', time.localtime())} -------------\n."
+                f"\n----------- {today_date()} -------------\n."
             )
             break
     f.close()
@@ -177,17 +193,19 @@ def file_writing(i):
     i = str(i)
     if j < 10:
         i = "0" + i
+    now = str(datetime.now())
+    now_time = now.split()[1]
 
     # reescreve a linha com o atual valor a iteração adicionando o 1 horario
     # quando o sinal é falso precisa pular a linha
     if i == "01" and sinal == False:
         fh.write(
-            f'\n{i}                           {time.strftime("%H:%M:%S", time.localtime())}'
+            f'\n{i}                           {now_time[:8]}'
         )
     # quado o sinal é vdd a linha ja é uma em branco
     elif i == "01" and sinal == True:
         fh.write(
-            f'{i}                           {time.strftime("%H:%M:%S", time.localtime())}'
+            f'{i}                           {now_time[:8]}'
         )
     # reescreve a linha com o atual valor a iteração matendo o horario anterior
     else:
