@@ -46,11 +46,11 @@ def bot_mode(modo, i):
     # modo leve [comentarios por min]
     if modo == 1:
         if i > 15:
-            time.sleep(random.uniform(i - 5, i + 20))
+            time.sleep(random.uniform(i - 2, i + 20))
         elif i > 50:
             time.sleep(random.uniform(i - 15, i + 20))
         else:
-            time.sleep(random.uniform(10, 18))
+            time.sleep(random.uniform(17, 23))
     # modo moderado [comentarios por min]
     elif modo == 2:
         if i > 15:
@@ -58,15 +58,15 @@ def bot_mode(modo, i):
         elif i > 50:
             time.sleep(random.uniform(i - 30, i + 5))
         else:
-            time.sleep(random.uniform(5, 15))
+            time.sleep(random.uniform(10, 18))
     # modo intenso [comentarios por min]
     elif modo == 3:
         if i > 15:
-            time.sleep(random.uniform(i - 20, i + 0))
+            time.sleep(random.uniform(i - 20, i + 5))
         elif i > 50:
-            time.sleep(random.uniform(i - 30, i - 5))
+            time.sleep(random.uniform(i - 25, i - 5))
         else:
-            time.sleep(random.uniform(5, 10))
+            time.sleep(random.uniform(5, 15))
 
     # bad input case
     else:
@@ -244,7 +244,7 @@ print("\n")
 i = 1
 # Looping principal
 while True:
-    time.sleep(6)
+    time.sleep(5)
 
     word = random.choice(palavras)
     pyautogui.click()
