@@ -45,36 +45,40 @@ def bot_mode(modo, i):
 
     # modo leve [comentarios por min]
     if modo == 1:
-        if i > 15:
-            time.sleep(random.uniform(i - 2, i + 20))
+        if i > 17:
+            time.sleep(random.uniform(i - 5, i + 5))
         elif i > 50:
-            time.sleep(random.uniform(i - 15, i + 20))
+            time.sleep(random.uniform(i - 15, i + 15))
         else:
-            time.sleep(random.uniform(17, 23))
+            time.sleep(random.uniform(19, 23))
     # modo moderado [comentarios por min]
     elif modo == 2:
-        if i > 15:
-            time.sleep(random.uniform(i - 10, i + 10))
+        if i > 17:
+            time.sleep(random.uniform(i - 7, i + 0))
         elif i > 50:
-            time.sleep(random.uniform(i - 30, i + 5))
+            time.sleep(random.uniform(i - 20, i + 0))
         else:
-            time.sleep(random.uniform(10, 18))
+            time.sleep(random.uniform(15, 17))
     # modo intenso [comentarios por min]
     elif modo == 3:
-        if i > 15:
-            time.sleep(random.uniform(i - 20, i + 5))
+        if i > 17:
+            time.sleep(random.uniform(i - 10, i))
         elif i > 50:
             time.sleep(random.uniform(i - 25, i - 5))
         else:
-            time.sleep(random.uniform(5, 15))
+            time.sleep(random.uniform(10, 15))
 
     # bad input case
     else:
         if i == 1: print("INVALID INPUT\nO modo default (2. Moderado) foi acionado")
         modo = 2
         bot_mode(modo, i)
-
-    if i == 200:
+    
+    if i == 12:
+        time.sleep(random.uniform(8, 11))
+    elif i == 17 or i == 50:
+        time.sleep(random.uniform(10, 12))
+    elif i == 200:
         time.sleep(random.uniform(3000, 3500))
 
 
@@ -119,7 +123,7 @@ def handling_file():
             break
         else:
             f.write(
-                f"\n----------- {today_date()} -------------\n."
+                "\n----------- {} -------------\n.".format(today_date())
             )
             break
     f.close()
@@ -200,16 +204,16 @@ def file_writing(i):
     # quando o sinal é falso precisa pular a linha
     if i == "01" and sinal == False:
         fh.write(
-            f'\n{i}                           {now_time[:8]}'
+            '\n{}                           {}'.format(i, now_time[:8])
         )
     # quado o sinal é vdd a linha ja é uma em branco
     elif i == "01" and sinal == True:
         fh.write(
-            f'{i}                           {now_time[:8]}'
+            '{}                           {}',format(i, now_time[:8])
         )
     # reescreve a linha com o atual valor a iteração matendo o horario anterior
     else:
-        fh.write(f"{i}                           {data[1]}")
+        fh.write("{}                           {}".format(i, data[1]))
 
 
 # tupla com as palavras que serão comentadas
@@ -257,6 +261,7 @@ while True:
         emoji()
 
     bot_mode(modo, i)
+    choose()
     night_check()
     pyautogui.press("enter")
     print("Numero de comentarios feitos:", i)
